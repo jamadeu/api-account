@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/jamadeu/api-account/config"
+	"github.com/jamadeu/api-account/router"
 )
 
 func main() {
@@ -13,6 +13,5 @@ func main() {
 		logger.Panic(err.Error())
 		return
 	}
-	s := gin.Default()
-	s.Run(":8000")
+	router.Initialize()
 }
