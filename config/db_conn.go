@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/jamadeu/api-account/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -11,7 +12,13 @@ func ConnectDb() (*gorm.DB, error) {
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		logger.Panic(err.Error())
+		logger.Error(err.Error())
+		return nil, err
+	}
+
+	// Migrate the schema
+	if err = db.AutoMigrate(&models.Account{}); err != nil {
+		logger.Error(err.Error())
 		return nil, err
 	}
 

@@ -10,7 +10,7 @@ func main() {
 
 	// Initialize configs
 	if err := config.Init(); err != nil {
-		logger.Panic(err.Error())
+		logger.Error(err.Error())
 		return
 	}
 	router.Initialize()
