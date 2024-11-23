@@ -13,5 +13,8 @@ func main() {
 		logger.Error(err.Error())
 		return
 	}
-	router.Initialize()
+	r := router.NewRouter(":8080", config.GetConnDB())
+	if err := r.Initialize(); err != nil {
+		panic(err)
+	}
 }
